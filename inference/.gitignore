@@ -1,0 +1,9 @@
+_trash/
+_history/
+**/__pycache__/
+**/.vscode/
+**/.DS_Store
+mmlu_overlap.json
+figures/
+results_by_category/
+results_backup/

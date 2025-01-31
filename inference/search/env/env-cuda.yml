@@ -1,0 +1,26 @@
+name: strawberry
+
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  
+dependencies:
+  - pytorch=2.4.0
+  - pytorch-cuda=11.8
+  - numpy=1.26.4
+  - python=3.10
+  - pip=24.0
+  - pip:
+    - tqdm==4.66.1
+    - wandb==0.17.5
+    - tokenizers==0.20
+    - transformers==4.45.2
+    - accelerate
+    - bitsandbytes>0.37.0
+    - pandas
+    - transformers
+    - blobfile
+    - orjson
+    - pylatexenc
+    - sympy

@@ -1,0 +1,12 @@
+tqdm==4.66.1
+wandb==0.17.5
+tokenizers==0.20
+transformers==4.45.2
+accelerate
+bitsandbytes>0.37.0
+pandas
+transformers
+blobfile
+orjson
+pylatexenc
+sympy

@@ -1,0 +1,187 @@
+[
+  {
+    "train_id": "6325_mmlu_health",
+    "eval_id": "6324_mmlu_health",
+    "question": "Greater milk consumption\n"
+  },
+  {
+    "train_id": "2854_mmlu_biology",
+    "eval_id": "3429_mmlu_biology",
+    "question": "How does energy release in combustion differ fromenergy releasein aerobic respiration?"
+  },
+  {
+    "train_id": "1672_mmlu_law",
+    "eval_id": "1671_mmlu_law",
+    "question": "In which of the following situations would the actions of the defendant(s) constitute a burglary?"
+  },
+  {
+    "train_id": "3475_mmlu_biology",
+    "eval_id": "3095_mmlu_biology",
+    "question": "What is the difference between a kinesis and a taxis?"
+  },
+  {
+    "train_id": "6562_mmlu_health",
+    "eval_id": "6561_mmlu_health",
+    "question": "A 72-year-old woman who has smoked 20 cigarettes daily for the past 38 years begins using eyedrops for glaucoma. Three days later, she has a marked increase in shortness of breath while walking up a flight of stairs. Which of the following drugs is the most likely cause of the development of shortness of breath in this patient?"
+  },
+  {
+    "train_id": "3090_mmlu_biology",
+    "eval_id": "2908_mmlu_biology",
+    "question": "Why is a moss plant restricted to a height of less thanabout 15 cm?"
+  },
+  {
+    "train_id": "6262_mmlu_health",
+    "eval_id": "6621_mmlu_health",
+    "question": "Which of the following statements is correct?\n"
+  },
+  {
+    "train_id": "3149_mmlu_biology",
+    "eval_id": "3150_mmlu_biology",
+    "question": "How are whales adapted for their life in cold waters?"
+  },
+  {
+    "train_id": "1140_mmlu_law",
+    "eval_id": "1141_mmlu_law",
+    "question": "A man and a woman were involved in a car accident that occurred when the man abruptly switched lanes in front of the woman without signaling. Unable to stop, the woman hit the man's car into a median. Immediately after the accident, as the two drivers emerged from their vehicles, a pedestrian, obviously emotional and upset from having just observed an accident, ran up to the man and shouted, \"You careless driver, you. Didn't you ever learn that you're supposed to use a turn signal when you switch lanes?\" The pedestrian is never identified and is not present at trial. The pedestrian's statement is"
+  },
+  {
+    "train_id": "1775_mmlu_law",
+    "eval_id": "1774_mmlu_law",
+    "question": "On May 2, a woman mailed the following letter to a man:\"May 1I have two tickets to the concert on July 1 at the auditorium in town. I'll sell them to you for $60 per ticket, which is $10 above face value. Since the concert has been sold out for months, I think that is a good deal. You have 15 days from the above date to decide whether to accept this offer. \"The man received the letter on May 4, but did not read it until May 6. On May 18, the man went to the woman's home and attempted to accept the offer. The woman replied:\"Too late! I sold the tickets last week for $75 each. \"Assume that the woman's letter created in the man a valid power of acceptance. Was that power terminated by lapse of time before the man went to the woman's home on May 17?"
+  },
+  {
+    "train_id": "3480_mmlu_biology",
+    "eval_id": "3038_mmlu_biology",
+    "question": "A woman opens a can of ham and beans and suspects food poisoning . She boils the contents for half an hour. A few hours after eating the ham and beans, nausea, vomit-ing, and diarrhea set in. Explain."
+  },
+  {
+    "train_id": "3034_mmlu_biology",
+    "eval_id": "2968_mmlu_biology",
+    "question": "Why does milk \\textquotedblleftspoil\\textquotedblright when kept in a refrigerator?"
+  },
+  {
+    "train_id": "1226_mmlu_law",
+    "eval_id": "1225_mmlu_law",
+    "question": "A man outraged by the recent church decision to clear a famous philosopher of charges of heresy, decided to present a lecture, open to the public, disproving the philosopher's theories. A state statute provides that: \"state universities can permit the use of their lecture halls to the public for worthwhile programs of public benefit, upon approval of the school board. \"The appropriate school board refused to make a university lecture hall available to the man on the grounds that the proposed lecture was not of worthwhile benefit to the public. As a result, the man brought suit in a state court against the school board and requested injunctive relief requiring the board to allow him the use of the lecture hall. The trial court denied relief and dismissed the suit. The judgment was affirmed by the state appellate court, and is now before the U. S. Supreme Court. In analyzing the state statute, which of the following statements is least accurate?"
+  },
+  {
+    "train_id": "6195_mmlu_health",
+    "eval_id": "6194_mmlu_health",
+    "question": "On a global scale, trends are suggesting that with rising incomes and urbanization we are seeing a rise in which food commodities?\n"
+  },
+  {
+    "train_id": "3101_mmlu_biology",
+    "eval_id": "3485_mmlu_biology",
+    "question": "What factors determine the characteristics ofparticular organismsthat exist in an ecosystem."
+  },
+  {
+    "train_id": "6495_mmlu_health",
+    "eval_id": "6496_mmlu_health",
+    "question": "A 42-year-old man comes to the physician for a follow-up examination. Four months ago, he underwent repair of a Dupuytren contracture. Physical examination shows decreased range of motion in the affected hand. The patient is upset that his hand has not fully healed, and he files a malpractice suit against the physician. Which of the following is the most likely precipitating factor in this patient's decision to file a malpractice suit?"
+  },
+  {
+    "train_id": "3513_mmlu_biology",
+    "eval_id": "3473_mmlu_biology",
+    "question": "What properties of water make it an essential component of living matter?"
+  },
+  {
+    "train_id": "3424_mmlu_biology",
+    "eval_id": "3039_mmlu_biology",
+    "question": "Using conditioning, how can one determine the sensitivity of a dog's hearing to sounds of different frequencies?"
+  },
+  {
+    "train_id": "6691_mmlu_health",
+    "eval_id": "6690_mmlu_health",
+    "question": "A 32-year-old man and his 29-year-old wife come to the office for evaluation for infertility. The wife's gynecologist has reported that her anatomic and physiologic evaluation disclosed no abnormalities and that assessment of potential male factors is needed. The husband is 188 cm (6 ft 3 in) tall with fair skin and little facial hair. He has mild gynecomastia and small, firm testicles. No sperm are seen on semen analysis. Which of the following tests is most likely to establish the underlying cause of this couple's infertility?"
+  },
+  {
+    "train_id": "1512_mmlu_law",
+    "eval_id": "1513_mmlu_law",
+    "question": "A debtor owed a creditor $750 on an old debt. On July 1, the debt was barred by the statute of limitations. On August 1, the debtor ran into the creditor at a party and overheard him telling mutual friends that the debtor \"is a deadbeat who weiches on his debts. \" Feeling pangs of guilt, the debtor approached the creditor and orally agreed to pay him the $750 debt on September 1. The debtor refused to pay the creditor the $750 as promised on September 1St. If the creditor sues the debtor to recover the $750 debt, which would provide the strongest grounds that the debtor's oral promise was unenforceable?"
+  },
+  {
+    "train_id": "2912_mmlu_biology",
+    "eval_id": "3258_mmlu_biology",
+    "question": "Define the termsAnthropoidea,Hominidaeand Hominoidea?"
+  },
+  {
+    "train_id": "10801_mmlu_philosophy",
+    "eval_id": "11177_mmlu_philosophy",
+    "question": "Another name for the fallacy of accident is"
+  },
+  {
+    "train_id": "3521_mmlu_biology",
+    "eval_id": "3196_mmlu_biology",
+    "question": "What is an organizer and how does it influence develop-ment ?"
+  },
+  {
+    "train_id": "3044_mmlu_biology",
+    "eval_id": "3321_mmlu_biology",
+    "question": "Black-headed gulls remove broken eggshells from their nests immediately after the young have hatched. Explain the biological significance of this behavior."
+  },
+  {
+    "train_id": "6054_mmlu_health",
+    "eval_id": "6053_mmlu_health",
+    "question": "Which of the following is not a reason for increased risk of vitamin or mineral deficiencies among older people in high income countries?\n"
+  },
+  {
+    "train_id": "3474_mmlu_biology",
+    "eval_id": "3369_mmlu_biology",
+    "question": "Describe the various land biomes that are usually encounteredby a traveler going from the equator to the arcticpolar ice cap."
+  },
+  {
+    "train_id": "2846_mmlu_biology",
+    "eval_id": "3372_mmlu_biology",
+    "question": "If a particular character in a certain species of animal were always transmitted from the mother to the offspring, but never from the father to the offspring, what could you conclude about its mode of inheritance?"
+  },
+  {
+    "train_id": "6571_mmlu_health",
+    "eval_id": "6572_mmlu_health",
+    "question": "Which of the following is true about the diagnosis of \"osteopenia\" or \"osteoporosis\" in North America and Western Europe\n"
+  },
+  {
+    "train_id": "3152_mmlu_biology",
+    "eval_id": "3151_mmlu_biology",
+    "question": "Explain three ways in which a person's basal metabolic rate maybe determined."
+  },
+  {
+    "train_id": "6703_mmlu_health",
+    "eval_id": "6704_mmlu_health",
+    "question": "Which one of these organs has the lowest energy expenditure per unit of body mass (kg)?\n"
+  },
+  {
+    "train_id": "3420_mmlu_biology",
+    "eval_id": "3476_mmlu_biology",
+    "question": "What prevents the stomach from being digested by itsown secretions?"
+  },
+  {
+    "train_id": "6815_mmlu_health",
+    "eval_id": "6816_mmlu_health",
+    "question": "Which of the following statements about glucose metabolism is correct?\n"
+  },
+  {
+    "train_id": "3314_mmlu_biology",
+    "eval_id": "3147_mmlu_biology",
+    "question": "Fiddler crabs are a dark brown color during the day and change to a pale brown color at night. Is it possible to reverse this pattern and make the crabs turn dark at night and light during the day? How?"
+  },
+  {
+    "train_id": "3315_mmlu_biology",
+    "eval_id": "3262_mmlu_biology",
+    "question": "Explain how density dependent controls of population occur."
+  },
+  {
+    "train_id": "3102_mmlu_biology",
+    "eval_id": "3042_mmlu_biology",
+    "question": "In attempting to map out the climatic conditions of the biosphere, would a climatologist find it helpful to correspond withan ecologist who has mapped the vegetation formations orbiomes of the biosphere?"
+  },
+  {
+    "train_id": "556_mmlu_business",
+    "eval_id": "352_mmlu_business",
+    "question": "A factory can produce 699 units of type I automobile suspension struts in an hour (using a new machine) at an average cost of $1.20 per unit. It also can produce type Y struts from the machine (30 per hr.) at a cost of $1.30 per unit. Each 24 hour production day has a budget of $4,005. The factory wants to produce as many type Y struts as possible, but has a quota of 2,700 type I struts per day. (i) How many type Y struts are produced daily? (ii) Is the factory's budget sufficient?"
+  },
+  {
+    "train_id": "3193_mmlu_biology",
+    "eval_id": "3515_mmlu_biology",
+    "question": "Certain nerve gases are known to cause a breakdown of cholinesterase. How would these gases affect the human body and why?"
+  }
+]

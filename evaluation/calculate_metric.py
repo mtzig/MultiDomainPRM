@@ -457,8 +457,6 @@ def compare_results(file_basename, majority_voting_folder, best_of_n_folder, wei
     print(f"Comparison plots saved to {output_dir}")
 
 if __name__ == "__main__":
-    # file_path = "/home/ec2-user/strawberry/full_precision_results/transformed_llama1b_math500_reward_results/transformed_llama1b_math500_with_math_psa_reward/parsed_answer_meta-llama_Llama-3.2-1B-Instruct_HuggingFaceH4_MATH-500_temp0.8_samples256_max_new_tokens_2048_with_math_psa_rewards.json"
-    # file_path = "/home/ec2-user/strawberry/full_precision_results/transformed_llama1b_math500_reward_results/transformed_llama1b_math500_with_rlhflow_8b_prm_reward/parsed_answer_meta-llama_Llama-3.2-1B-Instruct_HuggingFaceH4_MATH-500_temp0.8_samples256_max_new_tokens_2048_with_rlhflow_8b_prm_rewards.json"
     file_path = "full_precision_results/transformed_prm800k_small_test_set_reward_results/transformed_prm800k_small_test_set_with_rlhflow-ds_qwen_fulltune_reward/prm800_best_of_n_100_with_rlhflow-ds_qwen_fulltune_rewards.json"
     majority_voting_metrics = calculate_majority_voting_metrics_with_sampling(file_path)
     best_of_n_metrics = calculate_best_of_n_metrics(file_path)

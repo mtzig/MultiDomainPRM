@@ -41,7 +41,7 @@ class test_prm_dual(PRM):
         aggregation: str = "full",
         quantization_config: Optional[BitsAndBytesConfig] = None,
         device: Optional[Device] = None,
-        model_id: str = "Daewon0808/v5_qwen_lora"
+        model_id: str = "icml2025-submission409/v5_qwen_lora"
     ) -> None:
         self.device = (
             device if device else ("cuda" if torch.cuda.is_available() else "cpu")

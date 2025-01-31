@@ -46,7 +46,7 @@
 #             device if device else ("cuda" if torch.cuda.is_available() else "cpu")
 #         )
 #         self.quantization_config = quantization_config
-#         self.model_id = "mtzig/prm800k_qwen_alt_lora"
+#         self.model_id = "icml2025-submission409/prm800k_qwen_alt_lora"
 
 #         self.tokenizer = get_tokenizer(self.model_id)
 
@@ -203,7 +203,7 @@ class test_prm_dual(PRM):
         aggregation: str = "full",
         quantization_config: Optional[BitsAndBytesConfig] = None,
         device: Optional[Device] = None,
-        model_id: str = "Daewon0808/v5_llama_lora"
+        model_id: str = "icml2025-submission409/v5_llama_lora"
     ) -> None:
         self.device = (
             device if device else ("cuda" if torch.cuda.is_available() else "cpu")

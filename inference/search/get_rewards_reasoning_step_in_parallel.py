@@ -484,13 +484,13 @@ def main():
             from prm_models.prm_llama import test_prm_dual
             prm = test_prm_dual(
                 aggregation="full", 
-                model_id="mtzig/{}".format(test_prm)
+                model_id="icml2025-submission409/{}".format(test_prm)
             )
         elif test_prm in ["prm800k_qwen_alt_lora"]:
             from prm_models.prm_qwen import test_prm_dual
             prm = test_prm_dual(
                 aggregation="full", 
-                model_id="mtzig/{}".format(test_prm)
+                model_id="icml2025-submission409/{}".format(test_prm)
             )
         elif test_prm in ["qwen2.5_math_7b_prm800k"]:
             from prm_models.qwen25_math_7b_prm800k import test_prm_dual
@@ -502,13 +502,13 @@ def main():
             from prm_models.prm_qwen import test_prm_dual
             prm = test_prm_dual(
                 aggregation="full", 
-                model_id="Daewon0808/{}".format(test_prm)
+                model_id="icml2025-submission409/{}".format(test_prm)
             )
         elif test_prm in ["prm800k_llama_fulltune", "sciqqa_noaugs_llama_lora", "v4_llama_lora", "v5_llama_lora", "v6_llama_lora", "sciqqa_augs_llama_lora", "mmlu_noaugs_llama_lora", "v7_noaugs_llama_lora", "mmlu_onlyaugs_llama_lora", "v7_onlyaugs_llama_lora", "sciqqa_onlyaugs_llama_lora", "mmlu_augs_llama_lora", "mmlu_math_noaugs_llama_lora", "mmlu_small_noaugs_llama_lora", "mmlu_heo_augs_llama_lora", "mmlu_noaugs_llamabase_lora"]:
             from prm_models.prm_llama import test_prm_dual
             prm = test_prm_dual(
                 aggregation="full", 
-                model_id="Daewon0808/{}".format(test_prm)
+                model_id="icml2025-submission409/{}".format(test_prm)
             ) 
         else:
             raise NotImplementedError

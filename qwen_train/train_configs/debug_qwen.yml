@@ -1,0 +1,38 @@
+model_id: 'fxmarty/tiny-dummy-qwen2' #'TinyPixel/small-llama2' #'openaccess-ai-collective/tiny-mistral' #'TinyPixel/small-llama2'
+train_data_path: './synth_data/prm800k_train_reprocessed.json' #'./synth_data/prm800k_phase2_eval_small.json'
+eval_data_path: './synth_data/prm800k_phase2_eval_debug.json'
+max_length: 750
+train_label_last_n: 1 # only compute loss on three tokens
+eval_label_last_n: 1 # we only want to evaluate on last token
+wandb_project: 'prm_train'
+lora_config:
+  r: 16
+  lora_alpha: 32  
+  lora_dropout: 0.05
+  task_type: 'CAUSAL_LM' # for our script should always be TOKEN_CLS
+training_args:
+  output_dir: './runs/qwen_debug_test'
+  learning_rate: 2.0e-5
+  gradient_accumulation_steps: 64
+  lr_scheduler_type: 'cosine' 
+  warmup_ratio: 0.1
+  # optim: adamw_apex_fused # apparently fastest version of adamw, requires installing nvidia apex
+  per_device_train_batch_size: 2
+  per_device_eval_batch_size: 5
+  num_train_epochs: 1
+  weight_decay: 0.01
+  eval_strategy: 'no'
+  eval_steps: 15
+  eval_on_start: false
+  logging_steps: 1
+  save_strategy: 'steps' # set to 'steps' if want to save every save_steps steps
+  save_steps: 500 #set it small so can test saving
+  save_total_limit: 1
+  load_best_model_at_end: false
+  push_to_hub: true
+  hub_strategy: 'end'
+  hub_token: null # put in huggingface access token
+  # seed: 765837
+  # data_seed: 034729
+  use_liger_kernel: false # can decrease memory, works with llama/mistral, should set to true on server, requires pip install liger-kernel
+  fsdp_config: null # should be set to list of configurations, or is this not necessary if fsdp is configed in accelerate configs?

@@ -1,0 +1,17 @@
+accelerate==1.1.10
+evaluate==0.4.3
+huggingface-hub
+numpy
+protobuf
+sentencepiece
+tokenizers
+torch==2.5.1
+tqdm
+transformers==4.46.0
+wandb
+easydict
+scikit-learn
+peft
+liger-kernel
+# ninja
+# flash-attn --no-build-isolation

@@ -1,0 +1,41 @@
+model_id: 'Daewon0808/prm800k_llama_fulltune'
+train_data_path: ['./synth_data/arlast_auged.json','./synth_data/chemqa_auged.json','./synth_data/medmcqa_auged.json','./synth_data/formular_auged.json']
+eval_data_path: './synth_data/prm800k_phase2_eval_small.json'
+max_length: 750
+train_label_last_n: 1 # only compute loss on three tokens
+eval_label_last_n: 1 # we only want to evaluate on last token
+get_prm800k: true
+skip_neg: true
+wandb_project: 'prm_train'
+lora_config:
+  r: 16
+  lora_alpha: 32  
+  lora_dropout: 0.1
+  target_modules: 'all-linear'
+  task_type: 'CAUSAL_LM' # for our script should always be TOKEN_CLS
+training_args:
+  output_dir: './runs/v7_onlyaugs800k_llama_lora'
+  learning_rate: 1.0e-4
+  gradient_accumulation_steps: 4
+  eval_accumulation_steps: 3
+  lr_scheduler_type: 'cosine' 
+  warmup_ratio: 0.1
+  bf16: true
+  per_device_train_batch_size: 4
+  per_device_eval_batch_size: 4
+  num_train_epochs: 1
+  weight_decay: 0.01
+  eval_strategy: 'steps'
+  eval_steps: 5
+  eval_on_start: true
+  logging_steps: 1
+  save_strategy: 'steps' # set to 'steps' if want to save every save_steps steps
+  save_steps: 500 #set it small so can test saving
+  save_total_limit: 1
+  load_best_model_at_end: false
+  push_to_hub: true
+  hub_strategy: 'checkpoint'
+  seed: 908932403
+  data_seed: 289245
+  use_liger_kernel: false # can decrease memory, works with llama/mistral, should set to true on server, requires pip install liger-kernel
+  fsdp_config: null # should be set to list of configurations, or is this not necessary if fsdp is configed in accelerate configs?

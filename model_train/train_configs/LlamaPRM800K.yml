@@ -1,12 +1,12 @@
-model_id: 'Qwen/Qwen2.5-Math-7B-Instruct'
-train_data_path: ['./synth_data/prm800k_train_reprocessed.json', './synth_data/unified_Deepseek-PRM-Data.json']
+model_id: 'meta-llama/Llama-3.1-8B-Instruct'
+train_data_path: './synth_data/prm800k_train_reprocessed.json'
 eval_data_path: './synth_data/prm800k_phase2_eval_small.json'
 max_length: 650
 train_label_last_n: 1 # only compute loss on last tokens
 eval_label_last_n: 1 # we only want to evaluate on last token
 wandb_project: 'prm_train'
 training_args:
-  output_dir: './runs/prm800k_qwen_fulltune'
+  output_dir: './runs/LlamaPRM800K'
   learning_rate: 1.25e-6
   gradient_accumulation_steps: 16
   eval_accumulation_steps: 3

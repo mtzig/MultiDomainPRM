@@ -6,7 +6,7 @@ train_label_last_n: 1 # only compute loss on last tokens
 eval_label_last_n: 1 # we only want to evaluate on last token
 wandb_project: 'prm_train'
 training_args:
-  output_dir: './runs/prm800k_qwen_fulltune'
+  output_dir: './runs/QwenPRM800K'
   learning_rate: 1.25e-6
   gradient_accumulation_steps: 16
   eval_accumulation_steps: 3

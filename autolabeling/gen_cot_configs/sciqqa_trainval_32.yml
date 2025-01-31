@@ -1,0 +1,11 @@
+experiment_name: 'sciqqa_trainval_32'
+SYS_PROMPT: 'The following are multiple choice questions (with answers). Think step by step and then finish your answer with "the answer is (X)" where X is the correct letter choice.'
+LLM_model : 'llama' # for this experiment, we specifically will use llama 3.2 11B model
+num_gen: 32
+temp: 0.8
+max_gen_len: 2048
+data_splits: # list of datasets and splits for which we want to do generation
+  - dataset: 'scienceqa'
+    splits: ['train', 'validation']
+  - dataset: 'sciq'
+    splits: ['train', 'validation']

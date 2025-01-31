@@ -1,0 +1,11 @@
+experiment_name: 'formular_fewshot'
+SYS_PROMPT: 'The following are reasoning questions requiring knowledge of scientific formulas. Think step by step (delimiting each of your steps with two newline characters) and then finish your step by step reasoning with "the answer is \boxed{X}" where X is your final answer (with the proper unit) to the question.'
+fewshot_path: './fewshots/formular_fewshot.json'
+LLM_model : 'llama' # for this experiment, we specifically will use llama 3.2 11B model
+no_parse: true
+num_gen: 32
+temp: 0.8
+max_gen_len: 2048
+data_splits: # list of datasets and splits for which we want to do generation
+  - dataset: 'formular'
+    splits: ['train']

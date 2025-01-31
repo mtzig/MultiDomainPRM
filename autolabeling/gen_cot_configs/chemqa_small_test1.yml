@@ -1,0 +1,12 @@
+experiment_name: 'chemqa_small_test1'
+SYS_PROMPT: 'The following are chemistry questions. Think step by step (delimiting each of your steps with two newline characters) and then finish your step by step reasoning with "the answer is \boxed{X}" where X is your final answer (with the proper unit) to the question.'
+LLM_model : 'llama' # for this experiment, we specifically will use llama 3.2 11B model
+no_parse: true
+num_gen: 2
+temp: 0.8
+max_gen_len: 2048
+data_splits: # list of datasets and splits for which we want to do generation
+  - dataset: 'chemqa'
+    splits: ['train']
+    subsample: 100
+    subsample_seed: 42345

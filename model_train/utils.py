@@ -76,7 +76,7 @@ def get_compute_loss_func():
 
         # output logits are in shape (B, L, V) - batch, seq length, vocab size
 
-        # conform to math-shepard inference method, 12 is ID of '-', 10 is ID of '+'
+
         logits = outputs.logits[:,:,[12,10]].reshape(-1,2)
 
 
@@ -87,8 +87,6 @@ def get_compute_loss_func():
                             ignore_index=-100)
             return loss
 
-        # num_items_in_batch
-        # https://github.com/huggingface/transformers/blob/v4.47.0/src/transformers/trainer.py#L5142
         loss = F.cross_entropy(input=logits,
                             target=labels.flatten(),
                             ignore_index=-100,

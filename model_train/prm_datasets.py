@@ -121,7 +121,7 @@ def tokenize_one_question(data, tokenizer, label_mask_token_id=-100, label_last_
 
     question_tokenized = tokenizer(f'{question} \n\n')
 
-    # we don't want to do token classification on the question and choices part of tokenized
+
     question_tokenized['labels'] = [label_mask_token_id] * len(question_tokenized.input_ids)
     
 

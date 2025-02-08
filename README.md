@@ -24,7 +24,7 @@ This script splits a large input file into smaller batches, uploads them to an S
 python aws_batch_inference.py --large_file_path <path_to_large_file> --model_id <model_id> --role_arn <role_arn> --input_bucket <input_bucket> --output_bucket <output_bucket> --batch_size <batch_size> --min_batch_size <min_batch_size>
 ```
 
-#### download_s3.py
+### download_s3.py
 
 This script downloads a folder from an S3 bucket to a local directory.
 

@@ -1,29 +1,18 @@
 import math
 import statistics
-from typing import Optional
-from peft import PeftModel
-import torch,os
-from .prm_interface import PRM, StepScore
-from transformers import BitsAndBytesConfig
-from torch.types import Device
-from transformers import (
-    AutoModelForCausalLM,
-    AutoTokenizer,
-    BitsAndBytesConfig,
-)
-
 import json
-import os
+import torch
+import torch.nn.functional as F
+from torch.types import Device
+from typing import Optional
+from transformers import AutoModel, AutoTokenizer, BitsAndBytesConfig
+from .prm_interface import PRM, StepScore
+
 def read_json_file(file_path):
 
     with open(file_path, 'r') as file:
         data = json.load(file)
     return data
-
-import torch
-from transformers import AutoModel, AutoTokenizer
-import torch.nn.functional as F
-
 
 def make_step_rewards(logits, token_masks):
     probabilities = F.softmax(logits, dim=-1)
@@ -37,18 +26,16 @@ def make_step_rewards(logits, token_masks):
         all_scores_res.append(non_zero_elements_list)
     return all_scores_res
 
-from tqdm import tqdm
-
-class test_prm_dual(PRM):
+class QwenMathPRM(PRM):
     def __init__(
         self,
-        aggregation: str = "full",
+        aggregation: str = 'full',
         quantization_config: Optional[BitsAndBytesConfig] = None,
         device: Optional[Device] = None,
-        model_id: str = "Qwen/Qwen2.5-Math-7B-PRM"
+        model_id: str = 'Qwen/Qwen2.5-Math-7B-PRM'
     ) -> None:
         self.device = (
-            device if device else ("cuda" if torch.cuda.is_available() else "cpu")
+            device if device else ('cuda' if torch.cuda.is_available() else 'cpu')
         )
         self.quantization_config = quantization_config
         self.model_id = model_id
@@ -67,7 +54,7 @@ class test_prm_dual(PRM):
         self.aggregation = aggregation
 
     def __call_single(self, single_beam: str) -> list[float]:
-        """
+        '''
         Computes scores for each reasoning step in the single_beam.
 
         Args:
@@ -75,16 +62,16 @@ class test_prm_dual(PRM):
 
         Returns:
             list[float]: The scores for each step in the Solution.
-        """
+        '''
         ###
 
         input_ids = self.tokenizer.encode(
             single_beam, 
-            return_tensors="pt", 
+            return_tensors='pt', 
         ).to(self.model.device)
 
         outputs = self.model(input_ids=input_ids)
-        step_sep_id = self.tokenizer.encode("<extra_0>")[0]
+        step_sep_id = self.tokenizer.encode('<extra_0>')[0]
         token_masks = (input_ids == step_sep_id)
 
         # print(token_masks)
@@ -95,24 +82,24 @@ class test_prm_dual(PRM):
         step_probs = step_reward[0]
 
         ###
-        if self.aggregation == "min":
+        if self.aggregation == 'min':
             return min(step_probs)
-        elif self.aggregation == "max":
+        elif self.aggregation == 'max':
             return max(step_probs)
-        elif self.aggregation == "mean":
+        elif self.aggregation == 'mean':
             return statistics.mean(step_probs)
-        elif self.aggregation == "prod":
+        elif self.aggregation == 'prod':
             return math.prod(step_probs)
-        elif self.aggregation == "last":
+        elif self.aggregation == 'last':
             return step_probs[-1]
-        elif self.aggregation == "full":
+        elif self.aggregation == 'full':
             return step_probs
         else:
             raise NotImplementedError
 
 
     def __call__(self, steps: list[str]) -> list[StepScore]:
-        """
+        '''
         Computes scores for a list of reasoning beams.
 
         Args:
@@ -120,7 +107,7 @@ class test_prm_dual(PRM):
 
         Returns:
             list[StepScore]: A list of StepScore objects, each containing step and score.
-        """
+        '''
         result = []
 
         for beam in steps:
@@ -128,42 +115,3 @@ class test_prm_dual(PRM):
             result.append(StepScore(step=beam, score=step_score))
 
         return result
-
-if __name__ == "__main__":
-    prm = test_prm_dual(
-                aggregation="full", 
-            )
-    
-    json_file_path = "/home/ec2-user/strawberry/prmMixedDomain/prmMixedDomain.json"
-    data = read_json_file(json_file_path)
-
-    tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-Math-7B-PRM800K", trust_remote_code=True)
-
-    for each_data in tqdm(data):
-        for cot in each_data["chain_of_thoughts"]:
-            steps = cot["steps"]
-            steps = [step.replace("<extra_0>", "") for step in steps]
-            question = each_data["question"].replace("<extra_0>", "")
-            # updated_steps = []
-            # for index, step in enumerate(steps):
-            #     indexed_step = f"{step} \n\n\n\n"
-            #     updated_steps.append(indexed_step)
-            # steps = updated_steps
-            # steps_all = f"{question} \n\n" + "".join(steps)
-            messages = [
-    {"role": "system", "content": "Please reason step by step."},
-    {"role": "user", "content": question},
-    {"role": "assistant", "content": "<extra_0>".join(steps) + "<extra_0>"},]
-            steps_all = tokenizer.apply_chat_template(
-            messages, 
-            tokenize=False, 
-            add_generation_prompt=False
-            )
-            rewards = prm([steps_all])
-            cot["prm_reward"] = rewards[0].score
-            print(cot["prm_reward"])
-            print(len(cot["prm_reward"]))
-            print(len(steps))
-            input()
-    
-

@@ -9,15 +9,15 @@ class StepScore:
 
 
 class PRM(ABC):
-    """An interface for Process Reward Models"""
+    '''An interface for Process Reward Models'''
 
     @abstractmethod
     def __call__(self, steps: list[str]) -> list[StepScore]:
-        """
+        '''
         Args:
             steps (list[str]): A list of reasoning solutions.
 
         Returns:
             list[StepScore]: Step scores and corresponding cot solution.
-        """
+        '''
         pass

@@ -1,5 +1,6 @@
 import os
 import math
+import argparse
 import boto3
 from pathlib import Path
 from datetime import datetime
@@ -116,7 +117,7 @@ def batch_inference_pipeline(file_path, input_bucket, output_bucket, input_folde
     :param min_batch_size: Minimum number of records for a valid batch.
     """
     # Split the large file into smaller files
-    output_folder_local = f'/home/ec2-user/aws_submitted_split_batches/{os.path.basename(file_path)}'
+    output_folder_local = f'./aws_submitted_split_batches/{os.path.basename(file_path)}'
     split_files = split_large_file(file_path, output_folder_local, batch_size, min_batch_size)
 
     # Upload each split file to S3 and submit a separate inference job
@@ -133,20 +134,24 @@ def batch_inference_pipeline(file_path, input_bucket, output_bucket, input_folde
         # Submit the batch inference job with a unique job name
         submit_batch_inference(split_file, input_bucket, output_bucket, input_folder, output_folder, role_arn, model_id, job_name_base, batch_number)
 
-if __name__ == "__main__":
 
-    large_file_path = ""
-
-    model_id = "meta.llama3-1-70b-instruct-v1:0"       # Your model ID
-    
-    role_arn = ""   # Your IAM role ARN, do not change
-    input_bucket = ""    # Your input S3 bucket
-    output_bucket = ""  # Your output S3 bucket
-
+def main(large_file_path, model_id, role_arn, input_bucket, output_bucket, batch_size, min_batch_size):
     input_folder = os.path.basename(large_file_path).split(".js")[0]
     output_folder = os.path.basename(large_file_path).split(".js")[0]
     job_name_base = os.path.basename(large_file_path).split(".js")[0]
-    batch_size = 25000
-    min_batch_size = 100  # Minimum batch size
 
     batch_inference_pipeline(large_file_path, input_bucket, output_bucket, input_folder, output_folder, role_arn, model_id, job_name_base, batch_size, min_batch_size)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Run batch inference pipeline.')
+    parser.add_argument('--large_file_path', type=str, required=True, help='Path to the large file')
+    parser.add_argument('--model_id', type=str, default="meta.llama3-1-70b-instruct-v1:0", help='Your model ID')
+    parser.add_argument('--role_arn', type=str, required=True, help='Your IAM role ARN')
+    parser.add_argument('--input_bucket', type=str, required=True, help='Your input S3 bucket')
+    parser.add_argument('--output_bucket', type=str, required=True, help='Your output S3 bucket')
+    parser.add_argument('--batch_size', type=int, default=25000, help='Batch size')
+    parser.add_argument('--min_batch_size', type=int, default=100, help='Minimum batch size')
+
+    args = parser.parse_args()
+
+    main(args.large_file_path, args.model_id, args.role_arn, args.input_bucket, args.output_bucket, args.batch_size, args.min_batch_size)

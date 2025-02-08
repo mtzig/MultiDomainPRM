@@ -1,4 +1,4 @@
-model_id: 'Daewon0808/prm800k_llama_fulltune'
+model_id: UW-Madison-Lee-Lab/Llama-PRM800K
 train_data_path: './data/mmlu_math_auged.json'
 eval_data_path: null
 max_length: 750

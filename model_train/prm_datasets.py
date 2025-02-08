@@ -27,13 +27,7 @@ def tokenize_step(cot_step, label, tokenizer, label_mask_token_id=-100, label_la
     return cot_step_tokenized
 
 
-def tokenize_one_cot(question_tokenized, data, tokenizer, label_mask_token_id=-100, label_last_n=None, max_length=None, contrastive=False, use_augs=True, mask_neg=False, skip_neg=False):
-    '''
-    contrastive: argument to test contrastive lose
-        Currently not implemented (so does nothing)
-
-    mask_neg: for chain of thought with negative step, should we mask steps before it
-    '''
+def tokenize_one_cot(question_tokenized, data, tokenizer, label_mask_token_id=-100, label_last_n=None, max_length=None, use_augs=True):
 
     if 'labels' not in data:
         return []
@@ -46,24 +40,17 @@ def tokenize_one_cot(question_tokenized, data, tokenizer, label_mask_token_id=-1
     if labels is None:
         return []
     
-    # for if we only want to use autolabeled correct CoT
-    # and counertfactual augmented steps
-    if skip_neg and not all(label==1 for label in labels):
-        return []
 
     cot_steps_tokenized = []
 
-    # if steps are all correct, don't care about masking
-    if mask_neg and all(label==1 for label in labels):
-            mask_neg = False
+ 
 
     for i,step in enumerate(data['steps']):
         cot_step = f'{step} \n\n\n\n'
 
-        if not mask_neg:
-            label = 1 if labels[i] == 1 else 0
-        else:
-            label = label_mask_token_id if labels[i] == 1 else 0
+  
+        label = 1 if labels[i] == 1 else 0
+     
 
         cot_step_tokenized = tokenize_step(cot_step, label=label, tokenizer=tokenizer, label_mask_token_id=label_mask_token_id, label_last_n=label_last_n)
 
@@ -82,9 +69,6 @@ def tokenize_one_cot(question_tokenized, data, tokenizer, label_mask_token_id=-1
             aug_step_content = aug['aug_step']
             aug_step = f'{aug_step_content} \n\n\n\n'
 
-            
-            # if aug['aug_type'] == 1:
-            #     continue
 
             # all augments are incorrect step, except those of type 1 (good) or 0 (okay)
             aug_label = 1 if aug['aug_type'] == 1 or aug['aug_type'] == 0 else 0
@@ -112,7 +96,7 @@ def tokenize_one_cot(question_tokenized, data, tokenizer, label_mask_token_id=-1
 
     return tokenized
 
-def tokenize_one_question(data, tokenizer, label_mask_token_id=-100, label_last_n=None, max_length=None, contrastive=False, use_augs=True, mask_neg=False, skip_neg=False):
+def tokenize_one_question(data, tokenizer, label_mask_token_id=-100, label_last_n=None, max_length=None, use_augs=True):
     '''
     can add aug_type param to specify which type of augmentation to use
     '''
@@ -121,14 +105,14 @@ def tokenize_one_question(data, tokenizer, label_mask_token_id=-100, label_last_
 
     question_tokenized = tokenizer(f'{question} \n\n')
 
-
+    # we don't want to do token classification on the question and choices part of tokenized
     question_tokenized['labels'] = [label_mask_token_id] * len(question_tokenized.input_ids)
     
 
     tokenized = []
 
     for cot in data['chain_of_thoughts']:
-        tokenized.extend(tokenize_one_cot(question_tokenized, cot, tokenizer, label_mask_token_id, label_last_n, max_length, contrastive, use_augs, mask_neg=mask_neg, skip_neg=skip_neg))
+        tokenized.extend(tokenize_one_cot(question_tokenized, cot, tokenizer, label_mask_token_id, label_last_n, max_length, use_augs))
     
     return tokenized
 
@@ -147,9 +131,15 @@ def read_json(d):
     
     return text_data
 
-def tokenize_data(data_path, tokenizer, label_mask_token_id=-100, label_last_n=None, max_length=None, contrastive=False, use_augs=True, mask_neg=False, skip_neg=False):
+def tokenize_data(data_path, tokenizer, label_mask_token_id=-100, label_last_n=None, max_length=None, use_augs=True):
     '''
     reads in file from data_path and tokenizes it into PRM format
+
+    label_last_n: if None thenlabel every token in step
+                  if int, then only label the last n tokens in step
+
+    max_length: maximum length of tokenized question and cot (used to prevent out of memory error)
+    use_augs: uses counterfactual augmentation if set to True
     '''
 
 
@@ -168,10 +158,7 @@ def tokenize_data(data_path, tokenizer, label_mask_token_id=-100, label_last_n=N
                                                    label_mask_token_id=label_mask_token_id, 
                                                    label_last_n=label_last_n,
                                                    max_length=max_length,
-                                                   contrastive=contrastive,
-                                                   use_augs=use_augs,
-                                                   mask_neg=mask_neg,
-                                                   skip_neg=skip_neg))
+                                                   use_augs=use_augs))
 
     return tokenize_data
 
@@ -179,9 +166,6 @@ class TokenizedPRMDataset(Dataset):
     '''
     Tokenized PRM dataset
     Currently just stores all data in a list
-
-    TODO: do we need to think about better ways to stream in data?
-    (Especially for large data)
     '''
     def __init__(self,  
                  data_path, 
@@ -189,43 +173,20 @@ class TokenizedPRMDataset(Dataset):
                  label_mask_token_id=-100,
                  label_last_n=None,
                  max_length=None,
-                 contrastive=False,
                  use_augs=True,
-                 mask_neg=False,
-                 skip_neg=False,
-                 get_prm800k=False
               ):
 
         super(TokenizedPRMDataset, self).__init__()
 
-        # hard code using subset of data
-            # first get data, then filter out those below 650
+
         
         self.tokenized_data = tokenize_data(data_path= data_path, 
                                             tokenizer =tokenizer, 
                                             label_mask_token_id=label_mask_token_id, 
                                             label_last_n=label_last_n, 
                                             max_length=max_length, 
-                                            contrastive=contrastive,
-                                            use_augs=use_augs,
-                                            mask_neg=mask_neg,
-                                            skip_neg=skip_neg)
+                                            use_augs=use_augs)
         
-        if get_prm800k:
-            # hardcoded path for now
-            prm_data = tokenize_data(data_path= './synth_data/prm800k_train_reprocessed.json', 
-                                    tokenizer =tokenizer, 
-                                    label_mask_token_id=label_mask_token_id, 
-                                    label_last_n=label_last_n, 
-                                    max_length=max_length, 
-                                    contrastive=contrastive,
-                                    use_augs=use_augs,
-                                    mask_neg=mask_neg,
-                                    skip_neg=skip_neg)
-            
-            for d in prm_data:
-                if len(d.input_ids) > 650: # the max length used for fulltuneing
-                    self.tokenized_data.append(d)
 
     def __len__(self):
         return len(self.tokenized_data)

@@ -3,7 +3,7 @@ import yaml
 import argparse
 from easydict import EasyDict as edict
 import os
-from utils import * #get_model,get_tokenizer,get_datasets,get_collate_func,get_compute_loss_func,get_compute_metrics
+from utils import *
 
 # set to suppress the following warning:
 # huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
@@ -67,16 +67,12 @@ def main(configs):
         checkpoint = configs.resume_from_checkpoint
     trainer.train(resume_from_checkpoint=checkpoint)
 
-    # # saving final model (especially necessary for FSDP if we dont use FULL_STATE_DICT
-    if trainer.is_fsdp_enabled:
-        trainer.accelerator.state.fsdp_plugin.set_state_dict_type("FULL_STATE_DICT")
-    trainer.save_model()
 
 
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Training script for traing Llama PRM')
-    parser.add_argument('-c','--config', type=str, help='Path to config json', default='./train_configs/tinyllama_configs.yml')
+    parser.add_argument('-c','--config', type=str, help='Path to config json', default='./train_configs/llama_prm800k.yml')
     args = parser.parse_args()
 
     with open(args.config) as stream:

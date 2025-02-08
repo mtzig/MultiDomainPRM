@@ -25,6 +25,9 @@ python aws_batch_inference.py --large_file_path <path_to_large_file> --model_id 
 ```
 
 #### download_s3.py
+
+This script downloads a folder from an S3 bucket to a local directory.
+
 ```sh
 python download_s3.py --bucket <bucket_name> --folder <s3_folder> --local-dir <local_directory>
 ```

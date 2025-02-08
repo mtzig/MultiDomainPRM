@@ -4,7 +4,7 @@ This repo is the supplementary material for the ICML submission 409, it is not f
 
 [Training and evaluation data can be accessed through the anonymous google drive](https://drive.google.com/drive/folders/1ZPk9oSlZROkAV29DmgHcrhCshXB5RqXo?usp=drive_link)
 
-![VersaPRM](figures/multi_domain_prm.pdf)
+![VersaPRM](figures/multi_domain_prm.svg)
 
 ## Abstract
 

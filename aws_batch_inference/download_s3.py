@@ -1,5 +1,6 @@
 import os
 import boto3
+import argparse
 from pathlib import Path
 
 def download_s3_folder(bucket_name, s3_folder, local_dir):
@@ -30,11 +31,14 @@ def download_s3_folder(bucket_name, s3_folder, local_dir):
 
     print(f"Download complete. Files are saved in {local_file_save_dir}")
 
-# Example usage
 if __name__ == "__main__":
-    output_bucket = ""  # Your output S3 bucket
-    local_output_dir = ""  # Local folder to save the downloaded files
-    output_folder = ""
-    download_s3_folder(output_bucket, output_folder, local_output_dir)
+    parser = argparse.ArgumentParser(description="Download a folder from S3 to a local directory.")
+    parser.add_argument('--bucket', required=True, help='Your output S3 bucket')
+    parser.add_argument('--folder', required=True, help='The folder in the S3 bucket to download')
+    parser.add_argument('--local-dir', required=True, help='Local folder to save the downloaded files')
+
+    args = parser.parse_args()
+
+    download_s3_folder(args.bucket, args.folder, args.local_dir)
 
     

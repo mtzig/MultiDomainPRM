@@ -9,3 +9,12 @@ This repo is the supplementary material for the ICML submission 409, it is not f
 ## Abstract
 
 Process Reward Models (PRMs) have proven effective at enhancing mathematical reasoning for Large Language Models (LLMs) by leveraging increased inference-time computation. However, they are predominantly trained on mathematical data and their generalizability to non-mathematical domains has not been rigorously studied. In response, this work first shows that current PRMs have poor performance in other domains. To address this limitation, we introduce **_VersaPRM_**, a multi-domain PRM trained on synthetic reasoning data generated using our novel data generation and annotation method. VersaPRM achieves consistent performance gains across diverse domains. For instance, in the MMLU-Pro category of Law, VersaPRM via weighted majority voting, achieves a 7.9% performance gain over the majority voting baseline---surpassing Qwen2.5-Math-PRM's gain of 1.3%. We further contribute to the community by open-sourcing all data, code and models for VersaPRM.
+
+## Folder Structure
+
+- `aws_batch_inference/`: Scripts for performing batch inference using AWS services.
+- `counterfactual_augmentation/`: Scripts for creating and processing counterfactual augmentation batches.
+- `evaluation/`: Scripts and resources for evaluating model performance, including metric calculations and batch output merging.
+- `figures/`: Contains visual representations and figures used in the project.
+- `model_train/`: Scripts and configurations for training models, including data preparation and training scripts.
+- `synth_cot_generation/`: Scripts for generating synthetic chain-of-thought (CoT) data for training and evaluation.

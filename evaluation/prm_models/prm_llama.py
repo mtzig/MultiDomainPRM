@@ -35,7 +35,7 @@ class LlamaPRM(PRM):
         aggregation: str = 'full',
         quantization_config: Optional[BitsAndBytesConfig] = None,
         device: Optional[Device] = None,
-        model_id: str = 'icml2025-submission409/v5_llama_lora'
+        model_id: str = 'UW-Madison-Lee-Lab/VersaPRM'
     ) -> None:
         self.device = (
             device if device else ('cuda' if torch.cuda.is_available() else 'cpu')

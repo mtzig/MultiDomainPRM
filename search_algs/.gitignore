@@ -1,0 +1,4 @@
+*.ipynb
+*.pt
+__pycache__*
+evaluation/results/*.csv
